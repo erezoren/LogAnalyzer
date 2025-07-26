@@ -1,26 +1,23 @@
 package loganalyzer;
 
 import java.util.List;
-import loganalyzer.collectors.LogCollector;
+import loganalyzer.collectors.LogCollectorReporter;
 import loganalyzer.model.LogEntry;
-import loganalyzer.report.Report;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class LogReportCreator {
 
-  final LogfileParser logfileParser;
+  final LogFileReader logFileReader;
 
-  public Report createLogreport(String path, List<LogCollector> logCollectors) {
-    Report report = new Report();
-
-    List<LogEntry> logEntries = logfileParser.parseFile(path);
-    logEntries
-        .forEach(le -> {
-          logCollectors
-              .forEach(la -> la.collect(le, report));
+  public void createLogReport(String path, List<LogCollectorReporter> logCollectorReporters) {
+    logFileReader.readFile(path,
+        logEntry -> {
+          if (logEntry != null) {
+            logCollectorReporters.forEach(collector -> collector.collect(logEntry));
+          }
         });
 
-    return report;
+    logCollectorReporters.forEach(LogCollectorReporter::print);
   }
 }

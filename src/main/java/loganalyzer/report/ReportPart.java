@@ -8,7 +8,7 @@ public abstract class ReportPart {
 
   abstract List<ReportValue> getReport();
 
-  void print() {
+  public void print() {
     System.out.println(String.format("%s:", getName()));
     getReport().forEach(rv -> System.out.println(rv.toString()));
   }
