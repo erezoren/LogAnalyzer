@@ -16,8 +16,9 @@ public class ClientIpCollectorReporter extends LogCollectorReporter {
 
   @Override
   public void collect(LogEntry logEntry) {
-    if (logEntry.getClientIp() != null) {
-      collector.merge(logEntry.getClientIp(), 1, Integer::sum);
+    String clientIp = logEntry.getClientIp();
+    if (clientIp != null) {
+      collect(clientIp, collector);
     }
   }
 
@@ -25,5 +26,10 @@ public class ClientIpCollectorReporter extends LogCollectorReporter {
   public void printReport() {
     ReportPart reportPart = new ClientIpReportPart(collector);
     reportPart.print();
+  }
+
+  @Override
+  public String analyzerName() {
+    return "Client IP Collector Reporter";
   }
 }

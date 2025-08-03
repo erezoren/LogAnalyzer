@@ -16,8 +16,9 @@ public class BrowserCollectorReporter extends LogCollectorReporter {
 
   @Override
   public void collect(LogEntry logEntry) {
-    if (logEntry.getBrowser() != null) {
-      collector.merge(logEntry.getBrowser(), 1, Integer::sum);
+    String browser = logEntry.getBrowser();
+    if (browser != null) {
+      collect(browser, collector);
     }
   }
 
@@ -25,5 +26,10 @@ public class BrowserCollectorReporter extends LogCollectorReporter {
   public void printReport() {
     ReportPart reportPart = new BrowserReportPart(collector);
     reportPart.print();
+  }
+
+  @Override
+  public String analyzerName() {
+    return "Browser Collector Reporter";
   }
 }

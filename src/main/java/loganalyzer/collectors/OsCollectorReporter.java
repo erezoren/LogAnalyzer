@@ -16,8 +16,9 @@ public class OsCollectorReporter extends LogCollectorReporter {
 
   @Override
   public void collect(LogEntry logEntry) {
-    if (logEntry.getOs() != null) {
-      collector.merge(logEntry.getOs(), 1, Integer::sum);
+    String os = logEntry.getOs();
+    if (os != null) {
+      collect(os, collector);
     }
   }
 
@@ -25,5 +26,10 @@ public class OsCollectorReporter extends LogCollectorReporter {
   public void printReport() {
     ReportPart reportPart = new OsReportPart(collector);
     reportPart.print();
+  }
+
+  @Override
+  public String analyzerName() {
+    return "OS Collector Reporter";
   }
 }
