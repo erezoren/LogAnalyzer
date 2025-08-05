@@ -1,16 +1,14 @@
 package loganalyzer;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import loganalyzer.model.LogEntry;
 
 public class LogFileReader {
@@ -27,7 +25,8 @@ public class LogFileReader {
     System.out.println("Reading log file......");
     List<Future<LogEntry>> futures = new ArrayList<>();
 
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+        LogFileReader.class.getClassLoader().getResourceAsStream(filePath)))) {
       String line;
       while ((line = reader.readLine()) != null) {
         String finalLine = line;
