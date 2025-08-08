@@ -16,6 +16,8 @@ mvn clean install
 ```sh
 java -jar target/Taboola-1.0-SNAPSHOT.jar
 ```
+Or in IDE run LogFileProcessor class. (main method)
+
 ## Test
 ```sh
 mvn test
