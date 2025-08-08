@@ -5,16 +5,32 @@
   <artifactId>Taboola</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>LogAnalyzer</name>
+  <properties>
+    <mockito.version>5.2.0</mockito.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.38</version>
     </dependency>
+    <!-- Third Party-->
     <dependency>
       <groupId>io.krakens</groupId>
       <artifactId>java-grok</artifactId>
       <version>0.1.9</version>
+    </dependency>
+    <!-- User-Agent Parser -->
+    <dependency>
+      <groupId>com.github.ua-parser</groupId>
+      <artifactId>uap-java</artifactId>
+      <version>1.5.4</version>
+    </dependency>
+    <!-- MaxMind GeoIP2 -->
+    <dependency>
+      <groupId>com.maxmind.geoip2</groupId>
+      <artifactId>geoip2</artifactId>
+      <version>4.0.0</version>
     </dependency>
     <!-- Test dependencies -->
     <dependency>
@@ -26,30 +42,19 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>5.1.1</version>
-      <scope>test</scope>
+      <version>${mockito.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.bytebuddy</groupId>
+      <artifactId>byte-buddy</artifactId>
+      <version>1.14.12</version>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-junit-jupiter</artifactId>
-      <version>5.1.1</version>
+      <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- User-Agent Parser -->
-    <dependency>
-      <groupId>com.github.ua-parser</groupId>
-      <artifactId>uap-java</artifactId>
-      <version>1.5.4</version>
-    </dependency>
-
-    <!-- MaxMind GeoIP2 -->
-    <dependency>
-      <groupId>com.maxmind.geoip2</groupId>
-      <artifactId>geoip2</artifactId>
-      <version>4.0.0</version>
-    </dependency>
-
   </dependencies>
   <build>
     <plugins>
