@@ -10,7 +10,7 @@ public abstract class ReportPart {
   private final String reset = "\033[0m";
   final Map<String, Integer> rawReport;
 
-  protected ReportPart(Map<String, Integer> rawReport) {
+  public ReportPart(Map<String, Integer> rawReport) {
     this.rawReport = rawReport;
   }
 
@@ -23,9 +23,10 @@ public abstract class ReportPart {
 
   public List<ReportValue> getReport() {
     int totalOperatingSystems = rawReport.values().stream().mapToInt(Integer::intValue).sum();
+
     List<ReportValue> reportValues = rawReport.entrySet().stream().map(es -> {
-      double precent = (double) es.getValue() / totalOperatingSystems;
-      double rounded = Math.round(precent * 100.0) / 100.0;
+      double percent = (double) es.getValue() / totalOperatingSystems;
+      double rounded = Math.round(percent * 100.0) / 100.0;
       return new ReportValue(es.getKey(), rounded);
     }).sorted(Comparator.comparingDouble((ReportValue r) -> r.percentage).reversed()).toList();
 

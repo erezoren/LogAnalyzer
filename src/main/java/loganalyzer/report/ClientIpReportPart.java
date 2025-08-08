@@ -12,5 +12,4 @@ public class ClientIpReportPart extends ReportPart {
   public String getName() {
     return "Country by Client IP";
   }
-
 }

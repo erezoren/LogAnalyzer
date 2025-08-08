@@ -12,6 +12,4 @@ public class OsReportPart extends ReportPart {
   public String getName() {
     return "Operating System";
   }
-
-
 }
